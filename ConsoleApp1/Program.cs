@@ -201,7 +201,7 @@ namespace ConsoleApp1
                         Console.WriteLine(a + " + " + b + " = " + res);
                         break;
                     case "2":
-                        Console.WriteLine("a - b = result");
+                        Console.WriteLine("|a| - |b| = result");
                         Console.WriteLine("Введіть число а:");
                         a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
                         Console.WriteLine("Введіть число b:");
@@ -211,7 +211,7 @@ namespace ConsoleApp1
                         Console.WriteLine(a + " - " + b + " = " + res);
                         break;
                     case "3":
-                        Console.WriteLine("a * b = result");
+                        Console.WriteLine("|a| * |b| = result");
                         Console.WriteLine("Введіть число а:");
                         a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
                         Console.WriteLine("Введіть число b:");
@@ -221,7 +221,7 @@ namespace ConsoleApp1
                         Console.WriteLine(a + " * " + b + " = " + res);
                         break;
                     case "4":
-                        Console.WriteLine("a / b = result");
+                        Console.WriteLine("|a| / |b| = result");
                         Console.WriteLine("Введіть число а:");
                         a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
                         Console.WriteLine("Введіть число b:");
@@ -231,7 +231,7 @@ namespace ConsoleApp1
                         Console.WriteLine(a + " / " + b + " = " + res);
                         break;
                     case "5":
-                        Console.WriteLine("Корінь від а = result");
+                        Console.WriteLine("Корінь від |а| = result");
                         Console.WriteLine("Введіть число а:");
                         a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
                         res = Math.Sqrt(a);
@@ -239,7 +239,7 @@ namespace ConsoleApp1
                         Console.WriteLine("sqrt(" + a + ")" + " = " + res);
                         break;
                     case "6":
-                        Console.WriteLine("а^b = result");
+                        Console.WriteLine("|а|^|b| = result");
                         Console.WriteLine("Введіть число а:");
                         a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
                         Console.WriteLine("Введіть число b:");
@@ -249,7 +249,7 @@ namespace ConsoleApp1
                         Console.WriteLine(a + "^" + b + " = " + res);
                         break;
                     case "7":
-                        Console.WriteLine("a*(b/100) = result");
+                        Console.WriteLine("|a|*(|b|/100) = result");
                         Console.WriteLine("Введіть число а (Число від якого знайти відсоток):");
                         a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
                         Console.WriteLine("Введіть число b (Відсоток від числа а):");
