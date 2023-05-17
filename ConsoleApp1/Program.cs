@@ -182,6 +182,9 @@ namespace ConsoleApp1
                         Console.WriteLine("Ви зробили операцію знаходження відсотка від числа");
                         Console.WriteLine(a + "*" + "(" + b + " / " + "100)" + " = " + res);
                         break;
+                    default:
+                        Console.WriteLine("Виберіть ТІЛЬКИ 1-7");
+                        break;
                 }
             } else
             {
@@ -255,7 +258,10 @@ namespace ConsoleApp1
                         Console.WriteLine("Ви зробили операцію знаходження відсотка від числа");
                         Console.WriteLine(a + "*" + "(" + b + " / " + "100)" + " = " + res);
                         break;
-                }
+                    default:
+                        Console.WriteLine("Виберіть ТІЛЬКИ 1-7");
+                        break;
+                } 
             }
 
             Console.ReadLine();
