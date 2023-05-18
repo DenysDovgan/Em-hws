@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    internal class Program
+    class E
     {
-        static void Main(string[] args)
+        public void showText(string text, ConsoleColor color = ConsoleColor.White)
         {
-            //task 1 -----------------------------------------------
-            /*Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.ForegroundColor = color;
+            Console.Write(text);
+
+            Console.WriteLine();
+        }
+        public void TaskOne() {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             double imt = 0;
 
@@ -29,18 +34,19 @@ namespace ConsoleApp1
             if (imt < 18.9)
             {
                 Console.WriteLine("Вам слід набрати вагу! Вага недостатня, щоб бути здоровим!");
-            } else if (imt < 25 && imt > 18.5)
+            }
+            else if (imt < 25 && imt > 18.5)
             {
                 Console.WriteLine("Ви молодець, Ваша вага в нормі!");
-            } else
+            }
+            else
             {
                 Console.WriteLine("Велика надмірна вага! Вам треба худнути! Полюбіть себе, життя чудове!");
             }
             Console.ReadLine();
-             */
-
-            //task 2 -----------------------------------------------------------
-            /*Console.OutputEncoding = System.Text.Encoding.UTF8;
+        }
+        public void TaskTwo() {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             double num = 0.0;
             double res = 0.0;
             Console.WriteLine("Конвертор одиниць виміру");
@@ -53,7 +59,8 @@ namespace ConsoleApp1
             Console.WriteLine(
                 "1) Дюйми -> Сантиметри\n" + "2) Сантиметри -> Дюйми\n" + "3) Фунти -> Кілограми\n" + "4) Кілограми -> Фунти");
             string choice = Console.ReadLine();
-            switch (choice) {
+            switch (choice)
+            {
                 case "1":
                     Console.WriteLine("Укажіть кількість дюймів:");
                     num = Convert.ToDouble(Console.ReadLine());
@@ -79,27 +86,32 @@ namespace ConsoleApp1
                     res = num * 2.205;
                     Console.WriteLine(num + " lg = " + Math.Round(res, 3) + " lb");
                     break;
-                default: 
+                default:
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Помилка, виберіть правильний пункт!");
                     Console.ResetColor();
                     break;
             }
-            Console.ReadLine();*/
-
-            //task 3 ------------------------------------------------------------------
-
+            Console.ReadLine();
+        }
+        public void TaskThree()
+        {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.WriteLine("Калькуляьор v1.0");
             bool abs = false;
 
             Console.WriteLine("Чи використовувати значення по модулю? (Y/N)");
             string absUserChose = Console.ReadLine();
-            if (absUserChose == "Y" || absUserChose == "y") {
+            if (absUserChose == "Y" || absUserChose == "y")
+            {
                 abs = true;
-            } else if (absUserChose == "N" || absUserChose == "n") {
+            }
+            else if (absUserChose == "N" || absUserChose == "n")
+            {
                 abs = false;
-            } else {
+            }
+            else
+            {
                 Console.WriteLine("Введіть тільки Y/N");
                 Thread.Sleep(2000);
                 return;
@@ -150,6 +162,11 @@ namespace ConsoleApp1
                         a = Convert.ToDouble(Console.ReadLine());
                         Console.WriteLine("Введіть число b:");
                         b = Convert.ToDouble(Console.ReadLine());
+                        if (b == 0)
+                        {
+                            Console.WriteLine("Ділення на 0 неможливе!");
+                            return;
+                        }
                         res = a / b;
                         Console.WriteLine("Ви зробили операцію ділення");
                         Console.WriteLine(a + " / " + b + " = " + res);
@@ -178,7 +195,7 @@ namespace ConsoleApp1
                         a = Convert.ToDouble(Console.ReadLine());
                         Console.WriteLine("Введіть число b (Відсоток від числа а):");
                         b = Convert.ToDouble(Console.ReadLine());
-                        res = (b/100)*a;
+                        res = (b / 100) * a;
                         Console.WriteLine("Ви зробили операцію знаходження відсотка від числа");
                         Console.WriteLine(a + "*" + "(" + b + " / " + "100)" + " = " + res);
                         break;
@@ -186,7 +203,8 @@ namespace ConsoleApp1
                         Console.WriteLine("Виберіть ТІЛЬКИ 1-7");
                         break;
                 }
-            } else
+            }
+            else
             {
                 switch (operStr)
                 {
@@ -226,6 +244,11 @@ namespace ConsoleApp1
                         a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
                         Console.WriteLine("Введіть число b:");
                         b = Math.Abs(Convert.ToDouble(Console.ReadLine()));
+                        if (b == 0)
+                        {
+                            Console.WriteLine("Ділення на 0 неможливе!");
+                            return;
+                        }
                         res = a / b;
                         Console.WriteLine("Ви зробили операцію ділення");
                         Console.WriteLine(a + " / " + b + " = " + res);
@@ -261,9 +284,50 @@ namespace ConsoleApp1
                     default:
                         Console.WriteLine("Виберіть ТІЛЬКИ 1-7");
                         break;
-                } 
+                }
             }
 
+            Console.ReadLine();
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            E e = new E();
+
+            e.showText("Виберіть завдання:", ConsoleColor.White);
+            e.showText("[1] Завдання №1", ConsoleColor.Cyan);
+            e.showText("[2] Завдання №2", ConsoleColor.Green);
+            e.showText("[3] Завдання №3", ConsoleColor.Yellow);
+            int menuM = Convert.ToInt32(Console.ReadLine());
+
+            Console.Clear(); Console.ResetColor();
+
+            switch (menuM)
+            {
+                case 1:
+                    e.TaskOne();
+                    break;
+                case 2:
+                    e.TaskTwo();
+                    break;
+                case 3:
+                    e.TaskThree();
+                    break;
+                default:
+                    e.showText("Виберіть завдання:", ConsoleColor.White);
+                    e.showText("[1] Завдання №1", ConsoleColor.Cyan);
+                    e.showText("[2] Завдання №2", ConsoleColor.Green);
+                    e.showText("[3] Завдання №3", ConsoleColor.Yellow);
+                    menuM = Convert.ToInt32(Console.ReadLine());
+
+
+                    Console.Clear();
+                    break;
+            }
             Console.ReadLine();
         }
     }
