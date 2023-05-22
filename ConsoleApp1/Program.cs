@@ -45,6 +45,7 @@ namespace ConsoleApp1
             }
             Console.ReadLine();
         }
+        //---------------------------two--------------------------
         public void TaskTwo() {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             double num = 0.0;
@@ -94,12 +95,22 @@ namespace ConsoleApp1
             }
             Console.ReadLine();
         }
+
+        //----------------------three----------------------------------
         public void TaskThree()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.WriteLine("Калькуляьор v1.0");
             bool abs = false;
-
+            string a, b = "";
+            double res, doubleA, doubleB = 0;
+            void enterAndSaving()
+            {
+                Console.WriteLine("Введіть число а:");
+                a = Console.ReadLine();
+                Console.WriteLine("Введіть число b:");
+                b = Console.ReadLine();
+            }
             Console.WriteLine("Чи використовувати значення по модулю? (Y/N)");
             string absUserChose = Console.ReadLine();
             if (absUserChose == "Y" || absUserChose == "y")
@@ -118,90 +129,103 @@ namespace ConsoleApp1
             }
             Console.WriteLine("Яку операцію Ви хочете виконати? (1-7)");
             Console.WriteLine("1) Додавання\n" + "2) Віднімання\n" + "3) Множення\n" + "4) Ділення\n" + "5) Корінь числа\n" + "6) Приведення в степінь\n" + "7) Відсоток від числа\n");
+
             string operStr = Console.ReadLine();
 
             Console.WriteLine("Увага! Якщо ви використовуєте числа з плаваючою точкою то пішіть її в виді 0,00");
-            double a, b, res = 0;
+
             if (abs == false)
             {
                 switch (operStr)
                 {
                     case "1":
                         Console.WriteLine("a + b = result");
-                        Console.WriteLine("Введіть число а:");
-                        a = Convert.ToDouble(Console.ReadLine());
-                        Console.WriteLine("Введіть число b:");
-                        b = Convert.ToDouble(Console.ReadLine());
-                        res = a + b;
-                        Console.WriteLine("Ви зробили операцію додавання");
-                        Console.WriteLine(a + " + " + b + " = " + res);
+                        enterAndSaving();
+
+                        if (Double.TryParse(a, out doubleA) && Double.TryParse(b, out doubleB))
+                        {
+                            res = doubleA + doubleB;
+                            Console.WriteLine("Ви зробили операцію додавання");
+                            Console.WriteLine($"{doubleA} + {doubleB} = {res}");
+                        } else { Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0"); }
                         break;
                     case "2":
                         Console.WriteLine("a - b = result");
-                        Console.WriteLine("Введіть число а:");
-                        a = Convert.ToDouble(Console.ReadLine());
-                        Console.WriteLine("Введіть число b:");
-                        b = Convert.ToDouble(Console.ReadLine());
-                        res = a - b;
-                        Console.WriteLine("Ви зробили операцію віднімання");
-                        Console.WriteLine(a + " - " + b + " = " + res);
+                        enterAndSaving();
+                        if (Double.TryParse(a, out doubleA) && Double.TryParse(b, out doubleB))
+                        {
+                            res = doubleA - doubleB;
+                            Console.WriteLine("Ви зробили операцію віднімання");
+                            Console.WriteLine($"{doubleA} - {doubleB} = {res}");
+                        } else { Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0"); }
                         break;
                     case "3":
                         Console.WriteLine("a * b = result");
-                        Console.WriteLine("Введіть число а:");
-                        a = Convert.ToDouble(Console.ReadLine());
-                        Console.WriteLine("Введіть число b:");
-                        b = Convert.ToDouble(Console.ReadLine());
-                        res = a * b;
-                        Console.WriteLine("Ви зробили операцію множення");
-                        Console.WriteLine(a + " * " + b + " = " + res);
+                        enterAndSaving();
+                        if (Double.TryParse(a, out doubleA) && Double.TryParse(b, out doubleB))
+                        {
+                            res = doubleA * doubleB;
+                            Console.WriteLine("Ви зробили операцію множення");
+                            Console.WriteLine($"{doubleA} * {doubleB} = {res}");
+                        } else {Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0");}
+
                         break;
                     case "4":
                         Console.WriteLine("a / b = result");
-                        Console.WriteLine("Введіть число а:");
-                        a = Convert.ToDouble(Console.ReadLine());
-                        Console.WriteLine("Введіть число b:");
-                        b = Convert.ToDouble(Console.ReadLine());
-                        if (b == 0)
+                        enterAndSaving();
+                        if (Double.TryParse(a, out doubleA) && Double.TryParse(b, out doubleB))
                         {
-                            Console.WriteLine("Ділення на 0 неможливе!");
-                            return;
-                        }
-                        res = a / b;
-                        Console.WriteLine("Ви зробили операцію ділення");
-                        Console.WriteLine(a + " / " + b + " = " + res);
+                            if (doubleB == 0)
+                            {
+                                Console.WriteLine("Ділення на 0 неможливе!");
+                                return;
+                            }
+                            res = doubleA / doubleB;
+                            Console.WriteLine("Ви зробили операцію ділення");
+                            Console.WriteLine($"{doubleA} / {doubleB} = {res}");
+                        } else {Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0");}
+                        
                         break;
                     case "5":
                         Console.WriteLine("Корінь від а = result");
                         Console.WriteLine("Введіть число а:");
-                        a = Convert.ToDouble(Console.ReadLine());
-                        res = Math.Sqrt(a);
-                        Console.WriteLine("Ви зробили операцію підведення до кореня");
-                        Console.WriteLine("sqrt(" + a + ")" + " = " + res);
+                        a = Console.ReadLine();
+                        if (Double.TryParse(a, out doubleA))
+                        {
+                            if (doubleA < 0)
+                            {
+                                Console.WriteLine("Неможливо знайти корінь від від'ємного числа");
+                            }
+                            res = Math.Sqrt(doubleA);
+                            Console.WriteLine("Ви зробили операцію підведення до кореня");
+                            Console.WriteLine($"sqrt({doubleA}) = {res}");
+                        } else {Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0");}
                         break;
                     case "6":
                         Console.WriteLine("а^b = result");
-                        Console.WriteLine("Введіть число а:");
-                        a = Convert.ToDouble(Console.ReadLine());
-                        Console.WriteLine("Введіть число b:");
-                        b = Convert.ToDouble(Console.ReadLine());
-                        res = Math.Pow(a, b);
-                        Console.WriteLine("Ви зробили операцію підведення до степеня");
-                        Console.WriteLine(a + "^" + b + " = " + res);
+                        enterAndSaving();
+                        if (Double.TryParse(a, out doubleA) && Double.TryParse(b, out doubleB))
+                        {
+                            res = Math.Pow(doubleA, doubleB);
+                            Console.WriteLine("Ви зробили операцію підведення до степеня");
+                            Console.WriteLine($"{doubleA} ^ {doubleB} = {res}");
+                        } else {Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0");}
                         break;
                     case "7":
                         Console.WriteLine("a*(b/100) = result");
                         Console.WriteLine("Введіть число а (Число від якого знайти відсоток):");
-                        a = Convert.ToDouble(Console.ReadLine());
+                        a = Console.ReadLine();
                         Console.WriteLine("Введіть число b (Відсоток від числа а):");
-                        b = Convert.ToDouble(Console.ReadLine());
-                        res = (b / 100) * a;
-                        Console.WriteLine("Ви зробили операцію знаходження відсотка від числа");
-                        Console.WriteLine(a + "*" + "(" + b + " / " + "100)" + " = " + res);
+                        b = Console.ReadLine();
+                        if (Double.TryParse(a, out doubleA) && Double.TryParse(b, out doubleB))
+                        {
+                            res = (doubleB / 100) * doubleA;
+                            Console.WriteLine("Ви зробили операцію знаходження відсотка від числа");
+                            Console.WriteLine($"{doubleA} * ({doubleB} / 100) = {res}");
+                        }
+                        else {Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0");}
                         break;
-                    default:
-                        Console.WriteLine("Виберіть ТІЛЬКИ 1-7");
-                        break;
+                    default: Console.WriteLine("Виберіть ТІЛЬКИ 1-7"); break;
                 }
             }
             else
@@ -210,76 +234,86 @@ namespace ConsoleApp1
                 {
                     case "1":
                         Console.WriteLine("|a| + |b| = result");
-                        Console.WriteLine("Введіть число а:");
-                        a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
-                        Console.WriteLine("Введіть число b:");
-                        b = Math.Abs(Convert.ToDouble(Console.ReadLine()));
-                        res = a + b;
-                        Console.WriteLine("Ви зробили операцію додавання");
-                        Console.WriteLine(a + " + " + b + " = " + res);
+                        enterAndSaving();
+                        if (Double.TryParse(a, out doubleA) && Double.TryParse(b, out doubleB))
+                        {
+                            res = Math.Abs(doubleA) + Math.Abs(doubleB);
+                            Console.WriteLine("Ви зробили операцію додавання");
+                            Console.WriteLine($"|{doubleA}| + |{doubleB}| = {res}");
+                        }
+                        else { Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0"); }
                         break;
                     case "2":
                         Console.WriteLine("|a| - |b| = result");
-                        Console.WriteLine("Введіть число а:");
-                        a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
-                        Console.WriteLine("Введіть число b:");
-                        b = Math.Abs(Convert.ToDouble(Console.ReadLine()));
-                        res = a - b;
-                        Console.WriteLine("Ви зробили операцію віднімання");
-                        Console.WriteLine(a + " - " + b + " = " + res);
+                        enterAndSaving();
+                        if (Double.TryParse(a, out doubleA) && Double.TryParse(b, out doubleB))
+                        {
+                            res = Math.Abs(doubleA) - Math.Abs(doubleB);
+                            Console.WriteLine("Ви зробили операцію віднімання");
+                            Console.WriteLine($"|{doubleA}| - |{doubleB}| = {res}");
+                        }
+                        else { Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0"); }
                         break;
                     case "3":
                         Console.WriteLine("|a| * |b| = result");
-                        Console.WriteLine("Введіть число а:");
-                        a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
-                        Console.WriteLine("Введіть число b:");
-                        b = Math.Abs(Convert.ToDouble(Console.ReadLine()));
-                        res = a * b;
-                        Console.WriteLine("Ви зробили операцію множення");
-                        Console.WriteLine(a + " * " + b + " = " + res);
+                        enterAndSaving();
+                        if (Double.TryParse(a, out doubleA) && Double.TryParse(b, out doubleB))
+                        {
+                            res = Math.Abs(doubleA) * Math.Abs(doubleB);
+                            Console.WriteLine("Ви зробили операцію множення");
+                            Console.WriteLine($"|{doubleA}| * |{doubleB}| = {res}");
+                        }
+                        else { Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0"); }
                         break;
                     case "4":
                         Console.WriteLine("|a| / |b| = result");
-                        Console.WriteLine("Введіть число а:");
-                        a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
-                        Console.WriteLine("Введіть число b:");
-                        b = Math.Abs(Convert.ToDouble(Console.ReadLine()));
-                        if (b == 0)
-                        {
-                            Console.WriteLine("Ділення на 0 неможливе!");
-                            return;
+                        enterAndSaving();
+                        if (Double.TryParse(a, out doubleA) && Double.TryParse(b, out doubleB))
+                        {   
+                            if (doubleB == 0)
+                            {
+                                Console.WriteLine("Ділення на 0 неможливе!");
+                                return;
+                            }
+                            res = Math.Abs(doubleA) / Math.Abs(doubleB);
+                            Console.WriteLine("Ви зробили операцію ділення");
+                            Console.WriteLine($"|{doubleA}| / |{doubleB}| = {res}");
                         }
-                        res = a / b;
-                        Console.WriteLine("Ви зробили операцію ділення");
-                        Console.WriteLine(a + " / " + b + " = " + res);
+                        else { Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0"); }
                         break;
                     case "5":
                         Console.WriteLine("Корінь від |а| = result");
                         Console.WriteLine("Введіть число а:");
-                        a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
-                        res = Math.Sqrt(a);
-                        Console.WriteLine("Ви зробили операцію підведення до кореня");
-                        Console.WriteLine("sqrt(" + a + ")" + " = " + res);
+                        a = Console.ReadLine();
+                        if (Double.TryParse(a, out doubleA))
+                        {
+                            res = Math.Sqrt(Math.Abs(doubleA));
+                            Console.WriteLine("Ви зробили операцію підведення до кореня");
+                            Console.WriteLine($"sqrt(|{doubleA}|) = {res}");
+                        }
+                        else { Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0"); }
                         break;
                     case "6":
                         Console.WriteLine("|а|^|b| = result");
-                        Console.WriteLine("Введіть число а:");
-                        a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
-                        Console.WriteLine("Введіть число b:");
-                        b = Math.Abs(Convert.ToDouble(Console.ReadLine()));
-                        res = Math.Pow(a, b);
-                        Console.WriteLine("Ви зробили операцію підведення до степеня");
-                        Console.WriteLine(a + "^" + b + " = " + res);
+                        enterAndSaving();
+                        if (Double.TryParse(a, out doubleA) && Double.TryParse(b, out doubleB))
+                        {
+                            res = Math.Pow(Math.Abs(doubleA), Math.Abs(doubleB));
+                            Console.WriteLine("Ви зробили операцію підведення до степеня");
+                            Console.WriteLine($"|{doubleA}| ^ |{doubleB}| = {res}");
+                        }
+                        else { Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0"); }
                         break;
                     case "7":
                         Console.WriteLine("|a|*(|b|/100) = result");
-                        Console.WriteLine("Введіть число а (Число від якого знайти відсоток):");
-                        a = Math.Abs(Convert.ToDouble(Console.ReadLine()));
-                        Console.WriteLine("Введіть число b (Відсоток від числа а):");
-                        b = Math.Abs(Convert.ToDouble(Console.ReadLine()));
-                        res = (b / 100) * a;
-                        Console.WriteLine("Ви зробили операцію знаходження відсотка від числа");
-                        Console.WriteLine(a + "*" + "(" + b + " / " + "100)" + " = " + res);
+                        enterAndSaving();
+                        if (Double.TryParse(a, out doubleA) && Double.TryParse(b, out doubleB))
+                        {
+                            res = (Math.Abs(doubleB)/ 100) * Math.Abs(doubleA);
+                            Console.WriteLine("Ви зробили операцію знаходження відсотка від числа");
+                            Console.WriteLine($"|{doubleA}| * (|{doubleB}| / 100) = {res}");
+                        }
+                        else { Console.WriteLine("Введить числа ТІЛЬКИ в фортаті 0,00 або 0"); }
                         break;
                     default:
                         Console.WriteLine("Виберіть ТІЛЬКИ 1-7");
