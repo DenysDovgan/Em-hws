@@ -323,6 +323,83 @@ namespace ConsoleApp1
 
             Console.ReadLine();
         }
+        public void AdditionalTask1()
+        {
+            Console.WriteLine("Введіть рядок слів, розділених пробілами:");
+            string input = Console.ReadLine();
+
+            string[] words = input.Split(' ');
+
+            string longestWord = "";
+            foreach (string word in words)
+            {
+                if (word.Length > longestWord.Length)
+                {
+                    longestWord = word;
+                }
+            }
+
+            Console.WriteLine("Найбільше слово: " + longestWord);
+        }
+        public void AdditionalTask2()
+        {
+            string input = "123, 67, 456, 22"; // Заданий рядок чисел
+
+            string[] numberStrings = input.Split(',');
+
+            int sum = 0;
+            foreach (string numberString in numberStrings)
+            {
+                int number;
+                if (int.TryParse(numberString.Trim(), out number))
+                {
+                    sum += number;
+                } else
+                {
+                    Console.WriteLine("Неможливо порахувати суму чимсел");
+                }
+            }
+
+            Console.WriteLine("Сума чисел: " + sum);
+        }
+        public void AdditionalTask3()
+        {
+            Console.WriteLine("Введіть перший рядок тексту:");
+            string input1 = Console.ReadLine();
+
+            Console.WriteLine("Введіть другий рядок тексту:");
+            string input2 = Console.ReadLine();
+
+            string[] words1 = input1.Split(' ');
+            string[] words2 = input2.Split(' ');
+
+            bool foundMatch = false;
+            foreach (string word1 in words1)
+            {
+                foreach (string word2 in words2)
+                {
+                    if (word1.Equals(word2, StringComparison.OrdinalIgnoreCase))
+                    {
+                        foundMatch = true;
+                        break;
+                    }
+                }
+
+                if (foundMatch)
+                {
+                    break;
+                }
+            }
+
+            if (foundMatch)
+            {
+                Console.WriteLine("Знайдено спільні слова.");
+            }
+            else
+            {
+                Console.WriteLine("Спільних слів не знайдено.");
+            }
+        }
     }
 
     internal class Program
@@ -333,9 +410,12 @@ namespace ConsoleApp1
             E e = new E();
 
             e.showText("Виберіть завдання:", ConsoleColor.White);
-            e.showText("[1] Завдання №1", ConsoleColor.Cyan);
-            e.showText("[2] Завдання №2", ConsoleColor.Green);
-            e.showText("[3] Завдання №3", ConsoleColor.Yellow);
+            e.showText("[1] Taks 1", ConsoleColor.Cyan);
+            e.showText("[2] Task 2", ConsoleColor.Green);
+            e.showText("[3] Task 3", ConsoleColor.Yellow);
+            e.showText("[4] Additional Task 1", ConsoleColor.Red);
+            e.showText("[5] Additional Task 2", ConsoleColor.Magenta);
+            e.showText("[6] Additional Task 3", ConsoleColor.White);
             int menuM = Convert.ToInt32(Console.ReadLine());
 
             Console.Clear(); Console.ResetColor();
@@ -351,7 +431,16 @@ namespace ConsoleApp1
                 case 3:
                     e.TaskThree();
                     break;
-                default:
+                case 4:
+                    e.AdditionalTask1();
+                    break;
+                case 5:
+                    e.AdditionalTask2();
+                    break;
+                case 6:
+                    e.AdditionalTask3();
+                    break;
+                default:    
                     e.showText("Виберіть завдання:", ConsoleColor.White);
                     e.showText("[1] Завдання №1", ConsoleColor.Cyan);
                     e.showText("[2] Завдання №2", ConsoleColor.Green);
