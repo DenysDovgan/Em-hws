@@ -7,90 +7,65 @@ using System.Threading;
 
 namespace ConsoleApp1
 {
-    static class MessageHelper
-    {
-        // Input Helpers
-        static public string getString(string message)
-        {
-            Console.WriteLine(message);
-            return Console.ReadLine();
-        }
-        static public double getDouble(string message)
-        {
-            try
-            {
-                return double.Parse(MessageHelper.getString(message));
-            }
-            catch
-            {
-                Console.WriteLine("Please enter valid number only");
-                Thread.Sleep(1000);
-                System.Environment.Exit(1);
-                return 0;
-            }
-        }
-    }
-
     internal class Program
     {
 
         static void Main(string[] args)
         {
+            Random rnd = new Random();
 
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.WriteLine("Calculator v2.0.0");
-            double firstNum, secondNum = 0;
-            string operation;
+            int firstDice, secondDice = 0;
+            int playerScore = 0, pcScore = 0, localScore = 0;
 
-            firstNum = MessageHelper.getDouble("Enter first number:");
-            operation = MessageHelper.getString("Enter operation (+, -, *, /):");
-            if (operation != "+" && operation != "-" && operation != "*" && operation != "/") 
-            { Console.WriteLine("Enter only +, -, *, /"); Thread.Sleep(1000); return; }
-            secondNum = MessageHelper.getDouble("Enter second number:");
-
-            // Output in switch/case helper
-            void taskDoing(string operationName, char oper)
+            void roundGoing(string a, string b)
             {
-                Console.WriteLine($"Now you are doing {operationName} oreration.");
-                double result = 0;
-                switch (oper)
-                {
-                    case '+':
-                        result = firstNum + secondNum;
-                        break;
-                    case '-':
-                        result = firstNum - secondNum;
-                        break;
-                    case '*':
-                        result = firstNum * secondNum;
-                        break;
-                    case '/':
-                        if (secondNum == 0)
-                        { Console.WriteLine("Division by 0 is not impossible"); return; }
-                        result = firstNum / secondNum;
-                        break;
+                firstDice = rnd.Next(1,7);
+                secondDice = rnd.Next(1,7);
+                Console.WriteLine($"It's {a} turn!");
+                Thread.Sleep(1000);
+                Console.WriteLine("Dices thrown!");
+                Console.WriteLine($"First dice is {firstDice}\n" + $"Second dice is {secondDice}");
+                localScore = firstDice + secondDice;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{b} got {localScore} in this round!");
+                Console.ResetColor();
+                Console.WriteLine("-----------------------------------------");
+                Thread.Sleep(2000);
+            }
+
+            bool isPlayerTurn = rnd.Next(2) == 0;
+            Console.WriteLine(isPlayerTurn ? "You are starting the game!" : "Computer is starting the game!");
+
+            for (int rounds = 1; rounds <= 4; rounds++) {
+                Console.WriteLine($"Round {rounds}!");
+
+                if (isPlayerTurn) 
+                { 
+                    roundGoing("your", "You");
+                    playerScore = playerScore + localScore;
                 }
+                else 
+                { 
+                    roundGoing("computer's", "Computer");
+                    pcScore = pcScore + localScore;
+                };
 
-                Console.WriteLine($"{firstNum} {oper} {secondNum} = {result}");
-
+                isPlayerTurn = !isPlayerTurn;
             }
 
-            switch (operation)
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Final results: ");
+            Console.ResetColor();
+            Console.WriteLine($"You have {playerScore} points!");
+            Console.WriteLine($"Computer has {pcScore} points!");
+            if (playerScore > pcScore)
             {
-                case "+":
-                    taskDoing("addition", '+');
-                    break;
-                case "-":
-                    taskDoing("subtraction", '-');
-                    break;
-                case "*":
-                    taskDoing("multiplication", '*');
-                    break;
-                case "/":
-                    taskDoing("division", '/');
-                    break;
-            }
+                Console.WriteLine("You won!");
+            } else if (pcScore > playerScore) {
+                Console.WriteLine("You lose!");
+            } else { Console.WriteLine("Tie!"); }
 
+            Console.WriteLine("Submit any key to exit");
             Console.ReadLine();
         }
     }
